@@ -23,3 +23,10 @@ create table IF NOT EXISTS `ims`.`orders` (
 	foreign key (`customer_id`) references customers (`id`),
 	foreign key (`ordered_products`) references items (`product_id`)
 );
+create table IF NOT EXISTS `ims`.`orderItems` (
+	`order_id` INT NOT NULL,
+	`product_id` INT,
+	`quantity` INT,
+	foreign key (`order_id`) references orders (`order_id`),
+	foreign key (`product_id`) references items (`product_id`)
+);
