@@ -43,6 +43,7 @@ public class CustomerDAO implements Dao<Customer> {
 		} catch (SQLException e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
+//			e.printStackTrace();
 		}
 		return new ArrayList<>();
 	}

@@ -6,7 +6,11 @@ import org.apache.logging.log4j.Logger;
 import com.qa.ims.controller.Action;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.ItemController;
+import com.qa.ims.controller.OrdersController;
 import com.qa.ims.persistence.dao.CustomerDAO;
+import com.qa.ims.persistence.dao.ItemsDAO;
+import com.qa.ims.persistence.dao.OrdersDAO;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
@@ -16,17 +20,25 @@ public class IMS {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private final CustomerController customers;
+	private final ItemController items;
+	private final OrdersController orders;
 	private final Utils utils;
 
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
 		this.customers = new CustomerController(custDAO, utils);
+		final ItemsDAO iteDAO = new ItemsDAO();
+		this.items = new ItemController(iteDAO, utils);
+		final OrdersDAO ordDAO = new OrdersDAO();
+		this.orders = new OrdersController(ordDAO, utils);
 	}
 
 	public void imsSystem() {
 		LOGGER.info("Welcome to the Inventory Management System!");
-		DBUtils.connect();
+//		DBUtils.connect();
+		DBUtils.connect("src/main/resources/db.properties");
+		DBUtils.getInstance().init("src/main/resources/sql-schema.sql", "src/main/resources/sql-data.sql");
 
 		Domain domain = null;
 		do {
@@ -50,10 +62,10 @@ public class IMS {
 				active = this.customers;
 				break;
 			case ITEM:
-				active = null;
+				active = this.items;
 				break;
 			case ORDER:
-				active = null;
+				active = this.orders;
 				break;
 			case STOP:
 				return;

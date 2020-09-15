@@ -20,33 +20,61 @@ public class Utils {
 	}
 
 	public Long getLong() {
-		String input = getString();
-		Long longInput = null;
-		do {
-			try {
-				longInput = Long.parseLong(input);
-			} catch (NumberFormatException nfe) {
-				LOGGER.info("Error - Please enter a number");
-			}
-		} while (longInput == null);
-		return longInput;
-	}
+        String input = null;
+        Long longInput = null;
+        do {
+            try {
+                input = getString();
+                longInput = Long.parseLong(input);
+            } catch (NumberFormatException nfe) {
+                LOGGER.info("Error - Please enter a number");
+            }
+        } while (longInput == null);
+        return longInput;
+    }
+    public String getString() {
+        return scanner.nextLine();
+    }
+    public Double getDouble() {
+        String input = null;
+        Double doubleInput = null;
+        do {
+            try {
+                input = getString();
+                doubleInput = Double.parseDouble(input);
+            } catch (NumberFormatException nfe) {
+                LOGGER.info("Error - Please enter a number");
+            }
+        } while (doubleInput == null);
+        return doubleInput;
+    }
 
-	public String getString() {
-		return scanner.nextLine();
-	}
+	public float getFloat() {
+        String input = null;
+        Float floatInput = null;
+        do {
+            try {
+                input = getString();
+                floatInput = Float.parseFloat(input);
+            } catch (NumberFormatException nfe) {
+                LOGGER.info("Error - Please enter a number");
+            }
+        } while (floatInput == null);
+        return floatInput;
+    }
 
-	public Double getDouble() {
-		String input = getString();
-		Double doubleInput = null;
-		do {
-			try {
-				doubleInput = Double.parseDouble(input);
-			} catch (NumberFormatException nfe) {
-				LOGGER.info("Error - Please enter a number");
-			}
-		} while (doubleInput == null);
-		return doubleInput;
+	public int getInt() {
+		String input = null;
+        Integer intInput = null;
+        do {
+            try {
+                input = getString();
+                intInput = Integer.parseInt(input);
+            } catch (NumberFormatException nfe) {
+                LOGGER.info("Error - Please enter a whole number");
+            }
+        } while (intInput == null);
+        return intInput;
 	}
 
 }
