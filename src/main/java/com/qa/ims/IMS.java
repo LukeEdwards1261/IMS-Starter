@@ -26,12 +26,12 @@ public class IMS {
 
 	public IMS() {
 		this.utils = new Utils();
-		final CustomerDAO custDAO = new CustomerDAO();
-		this.customers = new CustomerController(custDAO, utils);
-		final ItemsDAO iteDAO = new ItemsDAO();
-		this.items = new ItemController(iteDAO, utils);
-		final OrdersDAO ordDAO = new OrdersDAO();
-		this.orders = new OrdersController(ordDAO, utils);
+		final CustomerDAO customerDao = new CustomerDAO();
+		this.customers = new CustomerController(customerDao, utils);
+		final ItemsDAO itemsDao = new ItemsDAO();
+		this.items = new ItemController(itemsDao, utils);
+		final OrdersDAO ordersDao = new OrdersDAO(itemsDao, customerDao);
+		this.orders = new OrdersController(ordersDao, utils);
 	}
 
 	public void imsSystem() {

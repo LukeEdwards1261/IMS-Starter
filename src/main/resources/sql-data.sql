@@ -25,5 +25,15 @@ INSERT INTO `ims`.`items` (`product_name`, `product_type`,`product_price`) VALUE
 INSERT INTO `ims`.`items` (`product_name`, `product_type`,`product_price`) VALUES ('mouse', 'tech','9.99');
 INSERT INTO `ims`.`items` (`product_name`, `product_type`,`product_price`) VALUES ('monitor', 'tech','49.99');
 
-INSERT INTO `ims`.`orders`(`customer_id`,`ordered_products`,`product_quantity`) VALUES ('1','6','5');
+INSERT INTO `ims`.`orders`(`customer_id`) VALUES ('1');
+INSERT INTO `ims`.`orders`(`customer_id`) VALUES ('1');
+INSERT INTO `ims`.`orders`(`customer_id`) VALUES ('2');
+INSERT INTO `ims`.`orders`(`customer_id`) VALUES ('2');
+
+
+INSERT INTO `ims`.`orderitems`(`order_id`,`product_id`) VALUES ('1','6');
+INSERT INTO `ims`.`orderitems`(`order_id`,`product_id`) VALUES ('2','5');
+INSERT INTO `ims`.`orderitems`(`order_id`,`product_id`) VALUES ('3','3');
+INSERT INTO `ims`.`orderitems`(`order_id`,`product_id`) VALUES ('4','11');
+INSERT INTO `ims`.`orderitems`(`order_id`,`product_id`) VALUES ('5','12');
 

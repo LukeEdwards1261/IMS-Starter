@@ -39,29 +39,39 @@ public class OrdersController implements CrudController<Orders> {
 	public Orders create() {
 		LOGGER.info("Please enter the customer id of the customer placing the order");
 		Long orderId = utils.getLong();
-		LOGGER.info("Please enter the product id you would like to order");
-		Long orderProducts = utils.getLong();
-		LOGGER.info("Please enter quantity");
-		Long productQuantity = utils.getLong();
-		Orders order = ordersDAO.create(new Orders(orderId, orderProducts, productQuantity));
+//		LOGGER.info("Please enter the product id you would like to order");
+		Orders order = ordersDAO.create(new Orders(orderId));
 		LOGGER.info("Order created");
 		return order;
 	}
 
 	/**
-	 * Updates an existing customer by taking in user input. UP TO HERE
+	 * Updates an existing customer by taking in user input.
 	 */
 	@Override
 	public Orders update() {
+		Orders ordersUpdate = null;
 		LOGGER.info("Please enter the order id of the order you would like to update");
 		Long orderId = utils.getLong();
-		LOGGER.info("Please enter the new product ID that you would like to order");
-		Long productId = utils.getLong();
-		LOGGER.info("Please enter the quantity you would like of that product");
-		Long quantity = utils.getLong();
-		Orders order = ordersDAO.update(new Orders(orderId, productId, quantity));
+		LOGGER.info("would you like to add or remove an item from the order?");
+		String addOrRemove =utils.getString();
+		if (addOrRemove.equalsIgnoreCase("add")) {
+			LOGGER.info("Please enter the new product ID that you would like to order");
+			Long itemId = utils.getLong();
+			ordersUpdate = this.ordersDAO.add(orderId, itemId);
+			
+		} 
+		else if (addOrRemove.equalsIgnoreCase("remove")) {
+			LOGGER.info("Please enter the new product ID that you would like to remove");
+			Long itemId = utils.getLong();
+			ordersUpdate = this.ordersDAO.remove(orderId, itemId);
+	
+		}
+		else LOGGER.info("invalid, please enter add or remove");
+		
 		LOGGER.info("Order Updated");
-		return order;
+		
+		return ordersUpdate;
 	}
 
 	/**
@@ -76,5 +86,7 @@ public class OrdersController implements CrudController<Orders> {
 		LOGGER.info("Order deleted");
 		return ordersDAO.delete(orderId);
 	}
+
+	
 
 }

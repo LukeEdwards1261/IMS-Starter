@@ -15,18 +15,16 @@ create table IF NOT EXISTS `ims`.`items` (
 	PRIMARY KEY (`product_id`)
 );
 create table IF NOT EXISTS `ims`.`orders` (
-	`order_id` int AUTO_INCREMENT,
+	`order_id` int NOT NULL AUTO_INCREMENT,
 	`customer_id` int NOT NULL,
-	`ordered_products` int NOT NULL,
-	`product_quantity` int NULL DEFAULT NULL,
 	PRIMARY KEY (`order_id`),
-	foreign key (`customer_id`) references customers (`id`),
-	foreign key (`ordered_products`) references items (`product_id`)
+	foreign key (`customer_id`) references `ims`.`customers` (`id`)
 );
-create table IF NOT EXISTS `ims`.`orderItems` (
+create table IF NOT EXISTS `ims`.`orderitems` (
+	`orderitems_id` int NOT NULL AUTO_INCREMENT,
 	`order_id` INT NOT NULL,
 	`product_id` INT,
-	`quantity` INT,
-	foreign key (`order_id`) references orders (`order_id`),
-	foreign key (`product_id`) references items (`product_id`)
+	PRIMARY KEY (`orderitems_id`),
+	CONSTRAINT foreign key (`order_id`) references `ims`.`orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT foreign key (`product_id`) references `ims`.`items` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );

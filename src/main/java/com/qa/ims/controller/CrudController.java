@@ -13,7 +13,6 @@ public interface CrudController<T> {
 	T create();
 
 	T update();
-
+	
 	int delete();
-
 }
